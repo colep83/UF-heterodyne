@@ -8,7 +8,7 @@ def create_field(nm,q,x,y):
 def overlap(Field_in,Field_nm,x,y):
     import numpy as np
     #numerical overlap integral.
-    norm = (x[len(x)-1]-x[0])*(y[len(y)-1]-y[0])/(len(x)*len(y)) #normilization factor
+    norm = (x[1]-x[0])*(y[1]-y[0]) #normilization factor
     ccField= np.conj(Field_nm)
     C = np.sum(Field_in*ccField) * norm
     return C
@@ -54,3 +54,12 @@ def recompose(Cnm,mode,q,x,y): #how to structure variables
         recomposed_field = recomposed_field + Unm * Cnm[i]
         
     return recomposed_field
+
+def contrast(vals): #actually the peak to trough amplitude
+    a = vals[0] - vals[2]
+    b = vals[3] - vals[1]
+    d = vals[0] + vals[1] + vals[2] + vals[3]
+    
+    C = np.sqrt(a**2 + b**2) / 2
+    return C
+
